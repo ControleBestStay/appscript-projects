@@ -1,0 +1,15 @@
+{
+  "timeZone": "America/Sao_Paulo",
+  "exceptionLogging": "STACKDRIVER",
+  "runtimeVersion": "V8",
+  "dependencies": {
+    "libraries": [
+      {
+        "userSymbol": "StaysAPI",
+        "version": "0",
+        "libraryId": "1qAs4iZDzOmBUDAVhBHdWMJaiMUozgMAAMpUuKJJ2ZY1Qh4sZjkt9tyxa",
+        "developmentMode": true
+      }
+    ]
+  }
+}
