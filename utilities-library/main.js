@@ -1,3 +1,5 @@
+//TEST
+
 //Main sheet
 var MAIN_SPREADSHEET = SpreadsheetApp.openById("1wLzoy2kagWt8axemV0_e7sSEuWtUtHnEOmHWshIqglE");
 
