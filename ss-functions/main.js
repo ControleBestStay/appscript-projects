@@ -10,6 +10,28 @@ function OCCUPANCY(apartment=null, month=date())
   return data.length/daysInMonth(month, apartment);
 }
 
+/** 
+ * Returns occupancy rate for a specific apartment between today and the end of a specified month.
+ * @param {string} apartment Name of the apartment.
+ * @param {object} month The specific month used to calculate occupancy.
+ * @customfunction
+ */
+function OCCUPANCYEOM(apartment=null, month=null)
+{
+  let occupiedDays = 0;
+
+  let launchDate = dataFilter(aptData, [0, apartment])[0][2];
+  let monthEnd = new Date(month.getFullYear(), month.getMonth() + 1, 0);
+  let remainingDays = (launchDate.getTime() > TODAY.getTime() ? dateDif(launchDate, monthEnd) : dateDif(TODAY, monthEnd)) + 1;
+
+  let reservations = splitRes(apartment, month);
+  reservations.forEach(x => {
+    if(x[4].getTime() >= TODAY.getTime()) occupiedDays++;
+    });
+
+  return occupiedDays/remainingDays;
+}
+
 /**
  * @customfunction
  */

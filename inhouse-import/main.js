@@ -15,5 +15,3 @@ function main()
   fillDict();
   updateCheckBoxes();
 }
-
-
