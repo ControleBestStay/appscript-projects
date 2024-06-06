@@ -6,7 +6,7 @@ function EBITDA(apartment, month)
 function companyEBITDA(month = DATE(2024, 1))
 {
   let revenue = companyRevenue(month);
-  let expenses = companyExpenses(month, ['BartMitre297/301']);
+  let expenses = companyExpenses(month);
 
   return revenue - expenses;
 }
@@ -14,7 +14,7 @@ function companyEBITDA(month = DATE(2024, 1))
 function adjustedEBITDA(month=DATE(2024, 1))
 {
   let revenue = adjustedRevenue(month);
-  let expenses = adjustedExpenses(month, ['BartMitre297/301']);
+  let expenses = adjustedExpenses(month);
 
   return revenue - expenses;
 }

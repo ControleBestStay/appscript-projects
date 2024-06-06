@@ -50,7 +50,7 @@ function updateCheckBoxes()
         let tag = apt + "." + guest;
         
         if(!!issueDict[tag]) boxArrs[(j - 1)/5].push([issueDict[tag]]);
-        else boxArrs[(j - 1)/5].push([false]);
+        else boxArrs[(j - 1)/5].push([""]); 
       }
   for(let k = 1; k < data[0].length; k++)
     if((k - 1) % 5 == 0)

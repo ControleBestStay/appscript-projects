@@ -9,7 +9,7 @@ function reportExpCategories(importAll, ...args)
   return arr;
 }
 
-function expenses(apartment="VieiraSouto500/103", month=Util.DATE(2024, 1), excludeCategories=reportExpCategories(false, 13), excludeBills=false, excludeExp=false)
+function expenses(apartment, month, excludeCategories=reportExpCategories(false, 13, 20), excludeBills=false, excludeExp=false)
 {
   let bill = dataFilter(Util.MAIN_BIL_DATABASE, [0, apartment], [6, month, dateEqual]);
   let exp = dataFilter(Util.MAIN_EXP_DATABASE, [0, apartment], [6, month, dateEqual], [5, excludeCategories, (a, b) => { return !b.includes(a) } ]);
@@ -24,13 +24,13 @@ function expenses(apartment="VieiraSouto500/103", month=Util.DATE(2024, 1), excl
 
 function getExpenses(apartment, month) { return dataFilter(Util.MAIN_EXP_DATABASE, [0, apartment], [6, month, dateEqual]); }
 
-function companyExpenses(month = DATE(2022, 6), excluded=['BartMitre297/301'])
+function companyExpenses(month = DATE(2024, 4), excluded=[])
 {
   let apartments = dataFilter(Util.MAIN_APT_DATABASE, [0, "", (a, b) => a !== b && a !== Util.MAIN_APT_DATABASE[0][0]]);
   let exp = 0;
 
-  apartments.forEach(x => exp += expenses(x[0], month, reportExpCategories(false, 13), false, excluded.includes(x[0])));
-  exp += expenses('Empresa', month, reportExpCategories(false, 12, 13));
+  apartments.forEach(x => exp += expenses(x[0], month, reportExpCategories(false, 13, 20), false, excluded.includes(x[0])));
+  exp += expenses('Empresa', month, reportExpCategories(false, 12, 13, 20));
 
   return exp;
 }
@@ -43,19 +43,19 @@ function adjustedExpenses(month=DATE(2024, 1), excluded=[])
   let commissionedExpenses = 0, rentedExpenses = 0, companyExpenses = 0;
 
   commissionApartments.forEach(x => { if(typeof x[4] === 'number') commissionedExpenses += expenses(x[0], month, reportExpCategories(false, 1, 3, 8, 12, 13), true);} );
-  rentedApartments.forEach(x => { if(x[0] !== '') rentedExpenses += expenses(x[0], month, reportExpCategories(false, 13), false, excluded.includes(x[0]));} )
-  companyExpenses = expenses("Empresa", month, reportExpCategories(false, 12, 13));
+  rentedApartments.forEach(x => { if(x[0] !== '') rentedExpenses += expenses(x[0], month, reportExpCategories(false, 13, 20), false, excluded.includes(x[0]));} )
+  companyExpenses = expenses("Empresa", month, reportExpCategories(false, 12, 13, 20));
 
-  let naExp = expenses("N/A", month, reportExpCategories(false, 12, 13));
+  let naExp = expenses("N/A", month, reportExpCategories(false, 12, 13, 20));
 
   return commissionedExpenses + rentedExpenses + companyExpenses + naExp; //<! REMOVE !>
 }
 
-function expensesByCategory(month=DATE(2024, 1), excludedApts=['BartMitre297/301'])
+function expensesByCategory(month=DATE(2024, 1), excludedApts=[])
 {
   let arr = [];
   let categories = reportExpCategories(true);
-  let excluded = ["Dividendo BestStay", "Impostos"];
+  let excluded = ["Dividendo BestStay", "Impostos", "Investimento"];
 
   let total = 0;
   for(let i in categories)
@@ -86,7 +86,7 @@ function companyExpensesByCategory(month=DATE(2024, 3))
   let arr = [];
   let categories = reportExpCategories(true);
 
-  let excluded = ["Dividendo BestStay", "Impostos"];
+  let excluded = ["Dividendo BestStay", "Impostos", "Investimento"];
 
   let total = 0;
   for(let i in categories)
@@ -116,11 +116,14 @@ function operationalExpenses(month=DATE(2024, 1))
 {
   let categories = reportExpCategories(false, "Brindes", "Manutenção", "Produtos Limpeza", "Pessoal Limpeza", "Pessoal BestStay", "Transporte", "Lavanderia", "Marketing", "Estoque", "Assinaturas");
 
+  let expenseDatabase = Util.MAIN_EXP_DATABASE;
+  expenseDatabase.shift();
+
   let total = 0;
   for(let i in categories)
   {
     let catTotal = 0;
-    let exp = dataFilter(Util.MAIN_EXP_DATABASE, [5, categories[i]], [6, month, dateEqual]);
+    let exp = dataFilter(expenseDatabase, [5, categories[i]], [6, month, dateEqual]);
     
     exp.forEach(x => { if(typeof x[2] === "number") catTotal += x[2]; } );
     total += catTotal;

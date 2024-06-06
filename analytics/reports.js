@@ -214,7 +214,7 @@ function createSheet(sheet_, apartment, month)
   let exp = formatExpenses(month, ...apartment);
 
   let nres = []
-  for (let i in apartment) nres = nres.concat(formatResCalendar(apartment[i], DATE(2024, 5)))
+  for (let i in apartment) nres = nres.concat(formatResCalendar(apartment[i], DATE(2024, 6)))
 
   APPEND_ARRAY(ds, [2, indexProp], prop);
   APPEND_ARRAY(ds, [3, indexRes], res);
