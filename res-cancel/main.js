@@ -4,6 +4,9 @@ var archiveLabel   = GmailApp.getUserLabelByName("Reservas BestStay - Cancelled 
 var ss             = SpreadsheetApp.openById("1wLzoy2kagWt8axemV0_e7sSEuWtUtHnEOmHWshIqglE");
 var dataBaseSheet  =                                       ss.getSheetByName("BaseReservas"); 
 
+var validationLabel = GmailApp.getUserLabelByName("Problematic Cancellations");
+
+
 function parseEmail() {
   var threads = label.getThreads();
   handleData(threads);

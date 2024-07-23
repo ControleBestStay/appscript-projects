@@ -9,6 +9,12 @@
         "libraryId": "1bWzbB8s8mMZokhfktkNlCWtQmlNbQJd7ipZAw63FM_dqEErBQ66B3Fht",
         "version": "0",
         "developmentMode": true
+      },
+      {
+        "userSymbol": "StaysAPI",
+        "version": "0",
+        "libraryId": "1qAs4iZDzOmBUDAVhBHdWMJaiMUozgMAAMpUuKJJ2ZY1Qh4sZjkt9tyxa",
+        "developmentMode": true
       }
     ]
   }

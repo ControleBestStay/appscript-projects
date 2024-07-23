@@ -8,16 +8,13 @@ var templateSheet = SpreadsheetApp.openById("1JcZ0GB3a-XNWw4yndAK0zh9prvcLyjZQYA
 var sheetFolder = DriveApp.getFolderById("19Egi0HVCAMohlGNQP1HfzLpu1HkUr-oX");
 var pdfFolder = DriveApp.getFolderById("1cND9Fkxl8S1vqnoCCz9fyqSvynxVbXnL");
 
-
-
 function t()
 {
-
 }
 
 function generateReports()
 { 
-  let month = DATE(2024, 6);
+  let month = CURRENT_MONTH;
   let apts = dataFilter(Util.MAIN_APT_DATABASE, [3, "", (a, b) => (a !== b && a !== "Proprietário" )], 
                                [6, "", (a, b) => (a !== b && a !== "Mês de Início")], 
                                [8, "", (a, b) => a === b ]);
@@ -36,7 +33,7 @@ function generateReports()
 
     let newSheetID = templateCopy(templateSheet, sheetName, sheetFolder);
     let newSheet = SpreadsheetApp.openById(newSheetID);
-    createSheet(newSheet, value, DATE(2024, 5));
+    createSheet(newSheet, value, REPORT_MONTH);
   }
 }
 

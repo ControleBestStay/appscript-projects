@@ -60,3 +60,39 @@ function GET_BLOCKED() {
   
   return arr;
 }
+
+function GET_LISTING_TITLES()
+{
+  let data = DATA_SHEET.getDataRange().getValues();
+  let dict = {};
+
+  for(let i = 1; i < data.length; i++)
+    dict[data[i][1]] = data[i][0];
+
+  return dict;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

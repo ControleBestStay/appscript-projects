@@ -1,11 +1,14 @@
 var CALENDAR_SPREADSHEET = SpreadsheetApp.openById("1qYe3cZKblbw4kMLLHr5wXm_KN2atOW6ZdSQx-VvUvv4");
 var TASK_SHEET = CALENDAR_SPREADSHEET.getSheetByName("TarefasDoDia");
 var CALENDAR_SHEET = CALENDAR_SPREADSHEET.getSheetByName("CalendarioTarefas");
+var DATA_SHEET = CALENDAR_SPREADSHEET.getSheetByName("Dados");
+var REVIEW_SHEET = CALENDAR_SPREADSHEET.getSheetByName("Reviews");
+var REVIEW_DATA = REVIEW_SHEET.getDataRange().getValues();
 
 var TASK_LIST = {};
 
 const TODAY = new Date(new Date().setHours(0, 0, 0, 0));
-const START_DATE = INCREMENT_DATE(TODAY, -2);
+const START_DATE = INCREMENT_DATE(TODAY, -7);
 const END_DATE = INCREMENT_DATE(TODAY, 11);
 
 const WEEKDAY = ["Dom.", "Seg.", "Ter.", "Qua.", "Qui.", "Sex.", "Sáb."];
@@ -28,6 +31,14 @@ const TASK_TYPE = {
   LIM: "Limpeza",
   VER: "Verificação"
 }
+
+let LISTING_TITLES = GET_LISTING_TITLES();
+
+let MONTHS = {};
+MONTHS["jan."] =  1; MONTHS["fev."] =  2; MONTHS["mar."] =  3;
+MONTHS["abr."] =  4; MONTHS["mai."] =  5; MONTHS["jun."] =  6;
+MONTHS["jul."] =  7; MONTHS["ago."] =  8; MONTHS["set."] =  9;
+MONTHS["out."] = 10; MONTHS["nov."] = 11; MONTHS["dez."] = 12;
 
 const TASK_STATUS = {
   PENDING: "Pendente",
@@ -57,6 +68,8 @@ function DATA_FILTER(arr, ...args) // [index, data] or [index, data, function]
   );
 }
 
+function APPEND_ARRAY(targetSheet, coord, array) { targetSheet.getRange(coord[0], coord[1], array.length, array[0].length).setValues(array); }
+
 function SORT_SHEET(sheet, column_ = 1, ascending_ = true) {
   let range = sheet.getRange(2, 1, sheet.getLastRow() - 1, sheet.getLastColumn());
   range.sort({column: column_, ascending: ascending_});
@@ -81,3 +94,5 @@ function WIPE_SHEET(sheet)
 
   sheet.deleteRows(begin, amount);
 }
+
+function DATE (y = new Date().getFullYear(), m = 1, d = 1) { return new Date(y, m - 1, d); }

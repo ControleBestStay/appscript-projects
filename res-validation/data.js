@@ -1,17 +1,25 @@
-function getStaysReservations(start, end) 
+function getStaysReservations(start = CURRENT_MONTH, end = END_MONTH) 
 {
+  console.time("d")
   let reservations = StaysAPI.BOOKING_RETRIEVE_RESERVATIONS(start, end, StaysAPI.DATE_TYPE["CHECK_IN" ]);
   let dictionary = {};
+  Logger.log(reservations.length)
+  console.timeEnd("d")
 
   for(let i in reservations)
   {
     let current = reservations[i];
     let id = reservations[i]["id"];
 
+    if(id=='JP08I')
+      Logger.log("s")
+
+    console.time("d")
     let res = StaysAPI.BOOKING_RETRIEVE_RESERVATION(id);
+    console.timeEnd("d")
 
     let totalPrice = res["price"]["_f_total"];
-    let commission = !!res["partner"] ? res["partner"]["commission"]["_mcval"]["BRL"] : 0;
+    let commission = (!res["partner"] || res["partner"]["name"] === "Website") ? 0 : res["partner"]["commission"]["_mcval"]["BRL"];
 
     let reservation = 
     {

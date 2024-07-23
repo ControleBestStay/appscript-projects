@@ -3,6 +3,7 @@ const WEEKDAY = ["Dom.", "Seg.", "Ter.", "Qua.", "Qui.", "Sex.", "Sáb."];
 const MONTH = ["Jan","Fev","Mar","Abr","Mai","Jun","Jul","Ago","Set","Out","Nov","Dez" ];
 
 var COMPANY_START = DATE(2022, 5);
+var REPORT_MONTH = new Date(new Date().getFullYear(), new Date().getMonth() - 1, 1);
 var CURRENT_MONTH = new Date(new Date().getFullYear(), new Date().getMonth(), 1);
 
 //Report sheets and folders [DELETE THIS]
@@ -196,7 +197,7 @@ function getApartmentData(apartment) { return dataFilter(Util.MAIN_APT_DATABASE,
 
 //Printing
 
-function blankRow(n) { let arr = []; for(let i = 0; i < n; i++) arr.push("."); return arr; }
+function blankRow(n, char = ".") { let arr = []; for(let i = 0; i < n; i++) arr.push(char); return arr; }
 
 //Dates
 function daysInMonth (date, apartment=null)

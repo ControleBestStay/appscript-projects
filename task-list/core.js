@@ -63,7 +63,7 @@ function GENERATE_TASKS()
     {
       ADD_TASK(TASK_TYPE.COT, MAKE_TASK(res[i][4], res[i][3], INCREMENT_DATE(res[i][2],  0), res[i][5], res[i][6]));
       ADD_TASK(TASK_TYPE.GRV, MAKE_TASK(res[i][4], res[i][3], INCREMENT_DATE(res[i][2],  0),      null,      null));
-      ADD_TASK(TASK_TYPE.RVW, MAKE_TASK(res[i][4], res[i][3], INCREMENT_DATE(res[i][2],  2),      null,      null));
+      if(!reviewExists(res[i])) ADD_TASK(TASK_TYPE.RVW, MAKE_TASK(res[i][4], res[i][3], INCREMENT_DATE(res[i][2],  2),      null,      null));
     }
   }
 }

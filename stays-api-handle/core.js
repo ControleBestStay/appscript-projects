@@ -15,13 +15,23 @@ const SECTIONS = {
   CONTENT: "content/",
   GLOBAL: "settings/global/",
   APP_SETTINGS: "settings/app/",
-  LISTING_SETTINGS: "settings/listing/"
+  LISTING_SETTINGS: "settings/listing/",
+  CALENDAR: "calendar/"
 };
 
 const REQUEST_METHOD = {
   GET: "get",
   POST: "post"
 };
+
+
+function test()
+{
+  let a = LISTING_RETRIEVE_CALENDAR("63cac2c15db21d72dcf97203", '2024-07-22', '2024-08-22');
+  //a.forEach(x=>Logger.log(x))
+  Logger.log(a)
+  Logger.log(typeof a)
+}
 
 function CORE_HANDLE_DATA(section, subSection, requestMethod, header = null, bodyParameters)
 {

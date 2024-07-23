@@ -27,8 +27,8 @@ function PARSE_LAUNDRY_DATA()
 
 function PARSE_INHOUSE_DATA()
 {
-  let start = INCREMENT_DATE(TODAY, -30);
-  let end   = INCREMENT_DATE(TODAY,  30);
+  let start = INCREMENT_DATE(TODAY, -40);
+  let end   = INCREMENT_DATE(TODAY,  40);
 
   let dataCO = StaysAPI.BOOKING_RETRIEVE_RESERVATIONS(start, end, StaysAPI.DATE_TYPE["CHECK_OUT"]);
   let dataCI = StaysAPI.BOOKING_RETRIEVE_RESERVATIONS(start, end, StaysAPI.DATE_TYPE["CHECK_IN" ]);

@@ -7,7 +7,21 @@ function sendEmailWarning(subject, message = "")
 
 function handleData (threads) {
   for (let i = 0; i < threads.length; i++) {
-    let message = threads[i].getMessages()[0];
+    let messages = threads[i].getMessages();
+    let message = "";
+
+    for(let j = 0; j < messages.length; j++)
+    {
+      let valid = !!messages[j].getPlainBody().match(/cancelado/);
+
+      if(valid) 
+      { 
+        message = messages[j];
+        break;
+      }
+    }
+
+    if(message === "") continue;
 
     parseCancelMessage(message);
 
@@ -84,20 +98,3 @@ function purgeRes(resID, total)
     }
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

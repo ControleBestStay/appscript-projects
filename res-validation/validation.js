@@ -13,15 +13,21 @@ function compareReservation(resObjA, resObjB)
 }
 
 function validateReservations() {
+  console.time("Total")
   let start = CURRENT_MONTH;
   let end = END_MONTH;
 
+  console.time("STAYSRES")
   let staysReservations = getStaysReservations(start, end);
+  console.timeEnd("STAYSRES")
+  console.time("DBRES")
   let databaseReservations = getDBReservations();
+  console.timeEnd("DBRES")
 
   let mismatchArr = [];
   let mismatchDict = {};
 
+  console.time("CHAOSLOOP")
   for(let i in databaseReservations)
   {
     let currentRes = databaseReservations[i];
@@ -50,8 +56,10 @@ function validateReservations() {
       }
     }
   }
+  console.timeEnd("CHAOSLOOP")
 
   updateValues(mismatchDict, mismatchArr);
+  console.timeEnd("TOTAL")
 }
 
 function applyChanges(cells, adjustments, mismatchArr)
