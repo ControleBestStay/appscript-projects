@@ -21,7 +21,8 @@ function handleData(threads)
     indices.push(i);
   }
 
-  APPEND_ARRAY(REVIEW_SHEET, [REVIEW_SHEET.getLastRow() + 1, 1], arr);
+  if(arr.length > 0)
+    APPEND_ARRAY(REVIEW_SHEET, [REVIEW_SHEET.getLastRow() + 1, 1], arr);
 
   sortReviewSheet();
 

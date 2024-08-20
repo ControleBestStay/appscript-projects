@@ -10,6 +10,9 @@ var pdfFolder = DriveApp.getFolderById("1cND9Fkxl8S1vqnoCCz9fyqSvynxVbXnL");
 
 function t()
 {
+  let a = COMPANY_DAILY_RATE(DATE(2023, 8));
+
+  Logger.log(a)
 }
 
 function generateReports()
