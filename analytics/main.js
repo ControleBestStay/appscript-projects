@@ -32,7 +32,7 @@ function generateReports()
   for (const [key, value] of Object.entries(props))
   {
     let unitsString = value.join(", ");
-    let sheetName = "Demonstrativo - " + unitsString + " - " + MONTH[month.getMonth() - 1] + "/" + month.getFullYear();
+    let sheetName = "Demonstrativo - " + unitsString + " - " + "Dezembro"/*MONTH[month.getMonth() - 1]*/ + "/" + "2024"/*month.getFullYear()*/; //<- fix
 
     let newSheetID = templateCopy(templateSheet, sheetName, sheetFolder);
     let newSheet = SpreadsheetApp.openById(newSheetID);

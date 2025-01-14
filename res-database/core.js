@@ -84,7 +84,7 @@ function parseMessageStays(message)
 
   switch(true)
   {
-    case resGap >= 2 && resGap <= 10: sendEmailWarning(emailData); break;
+    //case resGap >= 2 && resGap <= 10: sendEmailWarning(emailData); break;
     case resGap == 1: sendEmailWarning(emailData, "!IMPORTANTE! Nova reserva para AMANHÃ - "); break;
     case resGap == 0: sendEmailWarning(emailData, "!IMPORTANTE! Nova reserva para HOJE - "); break;
   }

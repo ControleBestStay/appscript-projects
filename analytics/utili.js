@@ -5,6 +5,7 @@ const MONTH = ["Jan","Fev","Mar","Abr","Mai","Jun","Jul","Ago","Set","Out","Nov"
 var COMPANY_START = DATE(2022, 5);
 var REPORT_MONTH = new Date(new Date().getFullYear(), new Date().getMonth() - 1, 1);
 var CURRENT_MONTH = new Date(new Date().getFullYear(), new Date().getMonth(), 1);
+var ANALYSIS_LAST_MONTH = new Date(new Date().getFullYear(), new Date().getMonth() + 5, 1);
 
 //Report sheets and folders [DELETE THIS]
 var testSheet = SpreadsheetApp.openById("1NAZIRPdZtZVhmFl_icJphhN4QubpgUYHxpEFwn008yQ").getSheetByName("data");

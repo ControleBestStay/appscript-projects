@@ -14,6 +14,7 @@ var MAIN_APT_SHEET = MAIN_SPREADSHEET.getSheetByName("Apartamentos"); //apt
 var MAIN_APD_SHEET = MAIN_SPREADSHEET.getSheetByName("DadosApts"); //aptData
 var MAIN_ANL_SHEET = MAIN_SPREADSHEET.getSheetByName("DadosAnalise");
 var MAIN_APTANL_SHEET = MAIN_SPREADSHEET.getSheetByName("DadosAnaliseApts");
+var MAIN_PRCDATA_SHEET = MAIN_SPREADSHEET.getSheetByName("DadosPrecificacao");
 
 var MAIN_RES_DATABASE = MAIN_RES_SHEET.getDataRange().getValues(); //resDB
 var MAIN_PAY_DATABASE = MAIN_PAY_SHEET.getDataRange().getValues(); //payDB

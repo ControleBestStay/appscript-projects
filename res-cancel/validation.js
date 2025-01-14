@@ -115,6 +115,7 @@ function validate(log)
       }
     }
   }
+  Logger.log("END")
 }
 
 

@@ -17,8 +17,8 @@ function GET_DATA(start, end, type)
 
   return arr.sort((a, b) => { 
     let i = type == StaysAPI.DATE_TYPE["CHECK_OUT"] ? 1 : 0; 
-    if(a[i].getDate() < b[i].getDate()) return -1;
-    if(a[i].getDate() > b[i].getDate()) return  1;
+    if(a[i].getTime() < b[i].getTime()) return -1;
+    if(a[i].getTime() > b[i].getTime()) return  1;
     else {
       if(a[2] < b[2]) return -1;
       if(a[2] > b[2]) return  1;

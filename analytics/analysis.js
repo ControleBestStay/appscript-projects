@@ -17,7 +17,7 @@ function sectionApartment()
   let month = new Date(COMPANY_START);
 
   let months = []
-  while(!dateEqual(month, CURRENT_MONTH))
+  while(!dateEqual(month, ANALYSIS_LAST_MONTH))
   {
     months.push(new Date(month));
     month.setMonth(month.getMonth() + 1);
@@ -45,7 +45,7 @@ function sectionApartment()
     {
       let apartmentData = dataFilter(aptData, [0, rows[i][0]])[0];
 
-      let firstMonth = apartmentData[3];
+      let firstMonth = apartmentData[1];
       let monthDeactivated = apartmentData[5]; 
 
       let hasNotLaunched = firstMonth == "" ? false : firstMonth.getTime() > months[j].getTime();

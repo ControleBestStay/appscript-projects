@@ -12,8 +12,8 @@ function main()
   {
     parsedArr.push(...parseRow(data[i]));
   }
-  let lastRowIndex = parseSheet.getDataRange().getValues().length + 1;
-  parseSheet.getRange("A" + lastRowIndex.toString() + ":J" + (lastRowIndex + parsedArr.length - 1).toString()).setValues(parsedArr);
+  let lastRowIndex = parseSheet.getLastRow();//parseSheet.getDataRange().getValues().length + 1;
+  parseSheet.getRange("A" + (lastRowIndex + 1).toString() + ":J" + (lastRowIndex + parsedArr.length).toString()).setValues(parsedArr);
   lastRowIndex = formSheet.getDataRange().getValues().length;
   formSheet.getRange("K2:K" + lastRowIndex.toString()).setValue(true);
 }

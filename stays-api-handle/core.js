@@ -27,7 +27,7 @@ const REQUEST_METHOD = {
 
 function test()
 {
-  let a = LISTING_RETRIEVE_CALENDAR("63cac2c15db21d72dcf97203", '2024-07-22', '2024-08-22');
+  let a = LISTING_RETRIEVE_CALENDAR("YD01H", '2024-11-29', '2024-12-02');
   //a.forEach(x=>Logger.log(x))
   Logger.log(a)
   Logger.log(typeof a)

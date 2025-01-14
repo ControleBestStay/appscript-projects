@@ -35,7 +35,7 @@ function LISTING_RETRIEVE_CALENDAR(id, dateFrom, dateTo, ignorePriceGroup=false,
   }
 
 
-  return UrlFetchApp.fetch(path, params);
+  return JSON.parse(UrlFetchApp.fetch(path, params));
 
     /*return JSON.parse(
                   CORE_HANDLE_DATA(

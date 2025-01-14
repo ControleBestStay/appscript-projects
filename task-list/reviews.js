@@ -37,20 +37,20 @@ function parseReview(message, date)
 
   let title = test[2].trim();
 
-  let dates = test[4].trim().split('–');
-  let ci = dates[0].split('de');
-  let co = dates[1].split('de');
+  let dates = test[4].trim().split(' – ');
+  let ci = dates[0], co = dates[1];
+    
+  let co_month = co.match(/\w+\./)[0];
+  let ci_month = !ci.match(/\w+\./) ? co_month : ci.match(/\w+\./)[0];
+    
+  let co_dayYear = co.match(/\d+/g);
+  let ci_dayYear = ci.match(/\d+/g);
+    
+  co = [Number(co_dayYear[0]), MONTHS[co_month], Number(co_dayYear[1])]
+  ci = [Number(ci_dayYear[0]), MONTHS[ci_month], Number((!ci_dayYear[1] ? co_dayYear[1] : ci_dayYear[1]))]
 
-  let co_day = Number(co[0].trim());
-  let co_month = MONTHS[co[1].trim()];
-  let co_year = Number(co[2].trim());
-
-  let ci_day = !!ci[0] ? Number(ci[0].trim()) : Number(ci.trim());
-  let ci_month = !!ci[1] ? MONTHS[ci[1].trim()] : co_month;
-  let ci_year = !!ci[2] ? Number(ci[2].trim()) : co_year;
-
-  let co_date = DATE(co_year, co_month, co_day);
-  let ci_date = DATE(ci_year, ci_month, ci_day);
+  let co_date = DATE(co[2], co[1], co[0]);
+  let ci_date = DATE(ci[2], ci[1], ci[0]);
 
   let rating = Number(message.getPlainBody().match(/(?<=AVALIAÇÃO GERAL).*/)[0].trim());
   let apartment = LISTING_TITLES[title];
