@@ -19,6 +19,8 @@ function onMyEdit(e) //optimize this sloth
 
 function changeTaskStatus(tag, value)
 {
+  Logger.log(tag)
+  Logger.log(value)
   let rng = fetchTaskStatusRange(tag);
   taskSheet.getRange(rng[0], rng[1]).setValue(value == "TRUE" ? "Realizada" : "Pendente");
 }

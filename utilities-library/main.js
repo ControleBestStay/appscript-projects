@@ -15,6 +15,7 @@ var MAIN_APD_SHEET = MAIN_SPREADSHEET.getSheetByName("DadosApts"); //aptData
 var MAIN_ANL_SHEET = MAIN_SPREADSHEET.getSheetByName("DadosAnalise");
 var MAIN_APTANL_SHEET = MAIN_SPREADSHEET.getSheetByName("DadosAnaliseApts");
 var MAIN_PRCDATA_SHEET = MAIN_SPREADSHEET.getSheetByName("DadosPrecificacao");
+var MAIN_REVIEW_SHEET = MAIN_SPREADSHEET.getSheetByName("Reviews");
 
 var MAIN_RES_DATABASE = MAIN_RES_SHEET.getDataRange().getValues(); //resDB
 var MAIN_PAY_DATABASE = MAIN_PAY_SHEET.getDataRange().getValues(); //payDB
@@ -23,6 +24,7 @@ var MAIN_CAT_DATABASE = MAIN_CAT_SHEET.getDataRange().getValues(); //catDB
 var MAIN_BIL_DATABASE = MAIN_BIL_SHEET.getDataRange().getValues(); //billDB
 var MAIN_APT_DATABASE = MAIN_APT_SHEET.getDataRange().getValues(); //aptDB
 var MAIN_APD_DATABASE = MAIN_APD_SHEET.getDataRange().getValues(); //aptDataDB
+var MAIN_REVIEW_DATABASE = MAIN_REVIEW_SHEET.getDataRange().getValues();
 
 //Schedule sheet
 var SCHEDULE_SPREADSHEET = SpreadsheetApp.openById("1OYjIII2HKJdbEsxgdR6MYGoctUAaLstD6u2yeipLqrk");

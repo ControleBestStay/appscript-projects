@@ -71,28 +71,3 @@ function GET_LISTING_TITLES()
 
   return dict;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

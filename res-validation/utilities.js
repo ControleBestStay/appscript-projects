@@ -1,5 +1,5 @@
-var CURRENT_MONTH = new Date(new Date().getFullYear(), new Date().getMonth() - 3, 1);
-var END_MONTH = new Date(new Date().getFullYear(), new Date().getMonth() + 3, 1);
+var CURRENT_MONTH = new Date(new Date().getFullYear(), new Date().getMonth() - 1, 1);
+var END_MONTH = new Date(new Date().getFullYear(), new Date().getMonth() + 1, 1);
 
 function date(y = new Date().getFullYear(), m = 1, d = 1) { return new Date(y, m - 1, d); }
 function dateEqual(a, b) { return a.getTime() === b.getTime(); }

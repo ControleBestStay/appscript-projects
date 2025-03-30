@@ -28,6 +28,7 @@ function DATE_DIF(a, b) {
 
   return Math.abs(Math.floor((utc2 - utc1) / _MS_PER_DAY));
 }
+function DATE (y = new Date().getFullYear(), m = 1, d = 1) { return new Date(y, m - 1, d); }
 
 //Data filtering
 /**

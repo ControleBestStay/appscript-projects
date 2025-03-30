@@ -28,7 +28,7 @@ function ADD_TASK(type, taskData, status=TASK_STATUS.PENDING, tag=null)
 {
   let _tag = !tag ? type + "." + taskData[1] + "." + taskData[2] + "." + DATE_TO_NUM(taskData[3]) : tag;
 
-  if(!TASK_LIST[_tag]) TASK_LIST[_tag] = [type, ...taskData, status, "BestStay", TASK_CATEGORY.OPS, "=A:A&\".\"&C:C&\".\"&D:D&\".\"&FLOOR(E:E)"]
+  if(!TASK_LIST[_tag]) TASK_LIST[_tag] = [type, ...taskData, status, "BestStay", TASK_CATEGORY.OPS, "=A:A&\".\"&C:C&\".\"&IF(D:D=\"\";B:B;D:D)&\".\"&FLOOR(E:E)"]
 }
 
 function GENERATE_STATIC_TASKS()

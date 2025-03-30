@@ -84,16 +84,26 @@ function getApartmentBills(apartment, month)
 }
 
 //SUMMARY=================================================================================
+function getApartmentReviews(apartment)
+{
+  let revList = Util.MAIN_REVIEW_DATABASE;
+  for(let i = 0; i < revList.length; i++)
+    if(revList[i][0]===apartment) return {reviews:revList[i][1], rating:revList[i][2]};
+}
 
 function getApartmentSummary(apartment, month, header = true)
 {
   let summary = [];
   if(header) summary.push(["Unidade",	"Receita", "Ocupação", "Diária", "Avaliações", "Nota"]);
 
+  let reviewData = getApartmentReviews(apartment);
   let data = getApartmentData(apartment);
-  summary.push([data[0].match(/(?<=\w+\/).*/)[0], revenue(apartment, month),
-                            occupancy(apartment, month),
-                            dailyRate(apartment, month), "0", "0.0/5.0"]);
+  summary.push([data[0].match(/\d+[A-Z]?(?=\D*$)/)[0], 
+                            revenue(apartment, month).toLocaleString("pt-BR", {minimumFractionDigits: 2, maximumFractionDigits: 2}),
+                            ((occupancy(apartment, month) * 100).toFixed(2) + "%").replace('.', ','),
+                            dailyRate(apartment, month).toLocaleString("pt-BR", {minimumFractionDigits: 2, maximumFractionDigits: 2}), 
+                            "'" + reviewData.reviews, 
+                            reviewData.rating + "/5.0"]);
   summary.push(blankRow(6));
 
   return summary;
@@ -124,7 +134,7 @@ function formatResCalendar(apt, month)
 
     if(data.length > 0 && dateEqual(day, data[index][4]))
     {
-      arr.push([day, WEEKDAY[day.getDay()], data[index][1], data[index][2], data[index][3], data[index][5]]); 
+      arr.push([day, WEEKDAY[day.getDay()], data[index][1], "'" + data[index][2], data[index][3], data[index][5]]); 
       if(index < data.length - 1) index++;
       continue;
     }
@@ -272,8 +282,37 @@ function formatSections(sheet_)
     if(titles.some(x => data[i].includes(x)))
     {
       sheet_.getRange(i + 1, 2, 1, data[i].length).setFontSize(24) //Section title row
-                                                  .setBorder(false, false, true, false, false, false, null, SpreadsheetApp.BorderStyle.SOLID_MEDIUM);
+                                                  .setBorder(false, false, true, false, false, false, null, SpreadsheetApp.BorderStyle.SOLID_MEDIUM)
+                                                  .setHorizontalAlignment("left");
       sheet_.getRange(i + 1, 2).setHorizontalAlignment("center");   //Icon cell
+    }
+
+    if(i > 0 && (data[i][0] === "Unidade" || data[i - 1][0] === "Unidade"))
+    {
+      for(let j = 0; j < data[i].length; j++) sheet_.getRange(i + 1, 2 + j).setHorizontalAlignment("center");
+    }
+
+    if(data[i][0] === "Data" || WEEKDAY.includes(data[i][1]))
+    {
+      for(let j = 0; j < data[i].length; j++) sheet_.getRange(i + 1, 2 + j).setHorizontalAlignment("center");
+      if(WEEKDAY.includes(data[i][1])) sheet_.getRange(i + 1, 4).setHorizontalAlignment("left");
     }
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

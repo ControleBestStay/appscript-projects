@@ -19,12 +19,15 @@ function handleData(threads)
       arr.push(dataList);
 
     indices.push(i);
+    Logger.log(i + 1);
   }
 
   if(arr.length > 0)
     APPEND_ARRAY(REVIEW_SHEET, [REVIEW_SHEET.getLastRow() + 1, 1], arr);
+  Logger.log("Reviews added.")
 
   sortReviewSheet();
+  Logger.log("Sheet sorted.");
 
   for(let i in indices)
     threads[indices[i]].addLabel(archiveLabel).removeLabel(label);
@@ -37,7 +40,7 @@ function parseReview(message, date)
 
   let title = test[2].trim();
 
-  let dates = test[4].trim().split(' – ');
+  let dates = test[4].trim().split('–');
   let ci = dates[0], co = dates[1];
     
   let co_month = co.match(/\w+\./)[0];
@@ -60,7 +63,9 @@ function parseReview(message, date)
     return null;
   }
 
-  return [apartment, ci_date, co_date, date, rating];
+  let link = msg.match(/(?<=\[)(https:\/\/www.airbnb.com.br\/progress.*?)(?=\])/)[0];
+
+  return [apartment, ci_date, co_date, date, rating, link];
 }
 
 function reviewExists(res)

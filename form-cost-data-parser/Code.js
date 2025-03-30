@@ -47,7 +47,7 @@ function parseRow(row)
 {
   let data = [];
 
-  let apt = row[7].trim().split(','),
+  let apt = row[7].replace(" ","").split(','),
       desc = row[3],
       val = formatValue(row[4].toString()),
       date = row[2],
@@ -57,6 +57,12 @@ function parseRow(row)
       month = "=D:D - DAY(D:D) + 1",
       receipt = row[8].replace(/,/g, '.'),
       link = row[9].replace(/,/g, '.')
+
+  if(apt.length > 1)
+  {
+    data.push(["Empresa", desc, val, date, pmnt, res, cat, month, receipt, link]);
+    data.push(["Empresa", desc, -val, date, pmnt, res, cat, month, receipt, link]);
+  }
 
   for(let i = 0; i < apt.length; i++)
   {

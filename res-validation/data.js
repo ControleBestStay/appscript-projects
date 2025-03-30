@@ -42,6 +42,7 @@ function getDBReservations()
   for(let i = 1; i < reservations.length; i++)
   {
     let current = reservations[i];
+    if(current[1] === "") continue;
 
     let id = current[12];
     let website = current[11];
