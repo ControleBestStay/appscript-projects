@@ -53,8 +53,6 @@ function GENERATE_TASKS()
   {
     if(res[i][1].getTime() >= START_DATE.getTime()) //Check-in 
     {
-      let mod = !res[i][5] ? -1 : -2;
-
       ADD_TASK(TASK_TYPE.LCI, MAKE_TASK(res[i][4], res[i][3], INCREMENT_DATE(res[i][1],  -1), res[i][5], res[i][6]));
       ADD_TASK(TASK_TYPE.CIN, MAKE_TASK(res[i][4], res[i][3], INCREMENT_DATE(res[i][1],   0), res[i][5], res[i][6]));
       ADD_TASK(TASK_TYPE.POS, MAKE_TASK(res[i][4], res[i][3], INCREMENT_DATE(res[i][1],   1),      null,      null));

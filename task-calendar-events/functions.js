@@ -2,6 +2,7 @@ function calendarEvent(e) {
   var range = e.range;
   var data = calendarSheet.getDataRange().getValues();
 
+  let user = Session.getActiveUser().getEmail();
   let row = range.getRow() - 1;
   let col = range.getColumn() - 1;
 
@@ -15,9 +16,10 @@ function calendarEvent(e) {
 
   let tag = task + "." + apt + "." + obs + "." + date;
 
-  logSheet.appendRow([new Date(), e.user, e.oldValue == "TRUE" ? "Realizada" : "Pendente", e.value == "TRUE" ? "Realizada" : "Pendente", tag]);
+  logSheet.appendRow([new Date(), user, e.oldValue == "TRUE" ? "Realizada" : "Pendente", e.value == "TRUE" ? "Realizada" : "Pendente", tag]);
 
   changeTaskStatus(tag, e.value);
+  sortSheet(logSheet, 1, 2, 1);
   //range.setNote('Last modified: ' + new Date());
 }
 
@@ -44,7 +46,7 @@ function inhouseEvent(e)
   sortSheet(inhouseHistorySheet);
 }
 
-function sortSheet(sheet, column_ = 1, ascending_ = false) {
-  let range = sheet.getRange(3, 1, sheet.getLastRow() - 1, sheet.getLastColumn());
+function sortSheet(sheet, column_ = 1, row=3, column=1, ascending_ = false) {
+  let range = sheet.getRange(row, column, sheet.getLastRow() - 1, sheet.getLastColumn());
   range.sort({column: column_, ascending: ascending_});
 }

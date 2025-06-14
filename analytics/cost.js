@@ -11,7 +11,7 @@ function reportExpCategories(importAll, ...args)
 
 function expenses(apartment, month, excludeCategories=reportExpCategories(false, 13, 20), excludeBills=false, excludeExp=false)
 {
-  let bill = dataFilter(Util.MAIN_BIL_DATABASE, [0, apartment], [6, month, dateEqual]);
+  let bill = dataFilter(Util.MAIN_BIL_DATABASE, [0, apartment], [7, month, dateEqual]);
   let exp = dataFilter(Util.MAIN_EXP_DATABASE, [0, apartment], [6, month, dateEqual], [5, excludeCategories, (a, b) => { return !b.includes(a) } ]);
 
   let billTotal = 0, expTotal = 0;

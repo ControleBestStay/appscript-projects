@@ -102,6 +102,12 @@ function incrementDate(date, amount = 0)
 	return newDate;
 }
 
+function test()
+{
+  let ress = splitRes("Visc379/104", DATE(2025, 5));
+  for(let i in ress) Logger.log(ress[i]);
+}
+
 /**
  * Filters data from reservation database and payment database and returns array in day by day format
  * NOTE: Use generic data filtering as both sheets are different (0 for apartment)
@@ -111,8 +117,12 @@ function splitRes(apartment, month, cancelled=false)
 {
   let resData = getReservations(apartment, month);
   let paySheet = Util.MAIN_PAY_DATABASE;
+  let aptSheet = Util.MAIN_APT_DATABASE;
   let payData = dataFilter(paySheet, [0, apartment]);
   
+  let feePayout = dataFilter(aptSheet, [0, apartment])[0][11];
+  let cleaningFee = dataFilter(aptSheet, [0, apartment])[0][9];
+
   let payCategories = [paySheet[1][11], paySheet[2][11], paySheet[3][11]];
 
   let arr = [];
@@ -120,9 +130,10 @@ function splitRes(apartment, month, cancelled=false)
   for(let i = 0; i < resData.length; i++)
   {
     let apt  = resData[i][0], guest   = resData[i][1], guests   = resData[i][2],
-        rate = resData[i][4], checkin = resData[i][6], checkout = resData[i][7], 
+        checkin = resData[i][6], checkout = resData[i][7], 
         nights = DATE_DIF(checkin, checkout), isCancelled = resData[i][8],
-        totalAmount = resData[i][3];
+        totalAmount = feePayout ? resData[i][3] : resData[i][3] - cleaningFee,
+        rate = totalAmount/nights;
 
     let totalAdjustment = 0;
     for(let j = 0; j < payData.length; j++)
